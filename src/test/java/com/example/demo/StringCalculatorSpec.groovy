@@ -30,6 +30,15 @@ class StringCalculatorSpec extends Specification{
             assert result == 1
     }
 
+    def "String 2 deberia retornar 2" (){
+        given: "Tengo un String con valor 2"
+            String numbers = "2"
+        when: "Cuando ejecuto la funcion sumar"
+            def result = stringCalculator.add(numbers)
+        then: "Deberia retornar 2"
+            assert result == 2
+    }
+
     def "String 1,2 deberia retornar la suma de los numeros" (){
         given: "Tengo un String con valor 1,2"
             String numbers = "1,2"
@@ -60,6 +69,16 @@ class StringCalculatorSpec extends Specification{
     def "String no numerico deberia arrojar una excepcion" (){
         given: "Tengo un String con valor aaaaaa"
             String numbers = "aaaa"
+        when: "Cuando ejecuto la funcion sumar"
+            def result = stringCalculator.add(numbers)
+        then: "Deberia arrojar ilegal argument exception"
+            final IllegalArgumentException exception = thrown()
+            exception.message == "Invalid Request"
+    }
+
+    def "Deberia retornar invalid argument exception para un string no numerico" (){
+        given: "Tengo un string no numerico"
+            String numbers = "a"
         when: "Cuando ejecuto la funcion sumar"
             def result = stringCalculator.add(numbers)
         then: "Deberia arrojar ilegal argument exception"

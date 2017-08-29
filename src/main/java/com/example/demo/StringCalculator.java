@@ -9,7 +9,7 @@ public class StringCalculator {
         if(numbers.length() == 0)
             return 0;
         if(numbers.length() == 1)
-            return 1;
+            return getSum(0,numbers);
 
         return getSumForSplittedNumbers(numbers);
 
@@ -30,13 +30,19 @@ public class StringCalculator {
         String[] splittedNumbers = numbers.split(delimiters);
         int sum =0;
         for(String number : splittedNumbers){
-            try{
-                sum += Integer.valueOf(number);
-            }
-            catch (NumberFormatException e){
-                throw new IllegalArgumentException("Invalid Request");
-            }
+            sum = getSum(sum, number);
 
+        }
+
+        return sum;
+    }
+
+    private int getSum(int sum, String number) {
+        try{
+            sum += Integer.valueOf(number);
+        }
+        catch (NumberFormatException e){
+            throw new IllegalArgumentException("Invalid Request");
         }
         return sum;
     }
